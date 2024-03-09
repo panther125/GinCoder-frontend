@@ -32,10 +32,10 @@
 - 文章以及题目题解都是采用 Markdown 编辑器。
 - 文章以及排行榜在未登陆情况下可以游玩。
 
-## 运行截图
+## 部分运行截图
 
-![image-20240310010635669](C:/Users/%E6%AC%A2%E6%AC%A2/AppData/Roaming/Typora/typora-user-images/image-20240310010635669.png)
+![image-20240310010635669](assets/image-20240310010635669.png)
 
-![image-20240310010718776](C:/Users/%E6%AC%A2%E6%AC%A2/AppData/Roaming/Typora/typora-user-images/image-20240310010718776.png)
+![image-20240310010718776](assets//image-20240310010718776.png)
 
-![image-20240310010747573](C:/Users/%E6%AC%A2%E6%AC%A2/AppData/Roaming/Typora/typora-user-images/image-20240310010747573.png)
+![image-20240310010747573](assets//image-20240310010747573.png)
