@@ -97,6 +97,7 @@ const readMoreComment = async (index: number, comment: CommentResp) => {
     const res = await CommentControllerService.listReplyUsingGet(comment.id);
     if(res.code === 200){
       comment.replyVOList = res.data;
+      
       // 回复大于5条展示分页
       // if (comment.replyCount > 5) {
       //   pageRef.value[index].setPaging(true);
@@ -284,6 +285,20 @@ onMounted(() => {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
+}
+
+.loading-warp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.loading-warp .btn {
+    letter-spacing: 1.25px;
+    padding: 10px 14px;
+    cursor: pointer;
+    color: #222 !important;
+    background-image: linear-gradient(to right, rgba(237, 118, 137, .9) 0,rgba(241, 139, 179, .8) 100%);
 }
 
 </style>

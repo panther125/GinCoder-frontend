@@ -277,7 +277,6 @@ const controlRef = ref<{ isShow: boolean }>();
 const minHeight = ref(55);
 const maxHeight = ref(800);
 const codeDefault = ref<string>("");
-
 interface RunContent {
   input: string;
   runMode: number;

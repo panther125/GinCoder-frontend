@@ -53,6 +53,7 @@
       <a-table
         :columns="columns"
         :data="dataList"
+        @row-click="checkCode"
         :pagination="{
           showTotal: true,
           pageSize: searchParams.pageSize,
@@ -100,29 +101,38 @@
         </template>
       </a-table>
     </a-card>
+    <recodeDetail 
+        :record-content="recordData"
+        :visible="isTipsShow" :colse-tips="colseTips"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import {
   Question,
-  QuestionSubmitQueryRequest,
+  QuestionSubmitVO,
   QuestionQueryBaseRequest,
+  LoginUserVO,
   QuestionControllerService,
 } from "../../../generated";
 import { ref, onMounted, computed, watch } from "vue";
 import moment from "moment";
-
 import { Message } from "@arco-design/web-vue";
+import recodeDetail from "@/components/Modals/recodeDetail.vue";
 import { useRoute } from 'vue-router';
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+// 获取相关信息
+const loginUser = computed<LoginUserVO>(() => store.state.user.loginUser);
 const store = useStore();
 const router = useRouter();
 const dataList = ref([]);
 const total = ref(0);
+const isRecodeShow = ref(false);
 const divederSize = 0;
 const codeLanguages = ref(["java", "cpp"]);
+const isTipsShow = ref(false);
 const searchParams = ref<QuestionQueryBaseRequest>({
   status: undefined,
   userName: undefined,
@@ -131,10 +141,11 @@ const searchParams = ref<QuestionQueryBaseRequest>({
   pageSize: 10,
   current: 1,
 });
-
 const pageSize = computed(() => searchParams.value.pageSize);
 const current = computed(() => searchParams.value.current);
-
+const recordData = ref<QuestionSubmitVO>({
+  code: "",
+});
 watch([pageSize, current], () => {
   loadData();
 });
@@ -233,6 +244,21 @@ const toQuestionPage = (question: Question) => {
   router.push({
     path: `/view/question/${question.id}`,
   });
+};
+/**
+ * 查看用户提交代码
+ */
+const checkCode = (rowData: any) => {
+  if(loginUser.value.userRole != "admin"){
+    Message.error("仅开放给管理员查看！");
+    return;
+  }
+  recordData.value = rowData;
+  isTipsShow.value = true;
+};
+
+const colseTips = () => {
+  isTipsShow.value = false;
 };
 </script>
 

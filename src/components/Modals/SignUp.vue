@@ -111,6 +111,7 @@ const toGetVerification = async () => {
     time.value = 60;
     const res = await UserControllerService.getVerificationCodeUsingGet(form.userAccount)
     Message.info(res.data ? res.data : "邮箱发送失败，用户一天内最多注册10次")
+    //Message.info(res.data ? res.data : res.message)
     handleTimeChange();
   }
 };
