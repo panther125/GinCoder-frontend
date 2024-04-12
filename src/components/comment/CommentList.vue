@@ -41,6 +41,13 @@
             <span>共{{ comment.replyCount }}条回复, </span>
             <span class="view-more-btn" @click="readMoreComment(index, comment)">点击查看</span>
           </div>
+          <!-- <a-pagination ref="pageRef" :total="comment.replyCount == 0 ? comment.replyCount : 0" 
+          :default-current="1" :current="index" :page-size="5" 
+          :commentId="comment.id"
+          :default-page-size="5"
+          :hide-on-single-page="true"
+          @get-current-page="getCurrentPage"
+          /> -->
           <pagination ref="pageRef" :total="comment.replyCount" :current="index" :page-size="5" :commentId="comment.id"
             @get-current-page="getCurrentPage"></pagination>
           <ReplyBox ref="replyRef" class="mt-4" :show="false" :questionId="questionId"
@@ -97,10 +104,10 @@ const readMoreComment = async (index: number, comment: CommentResp) => {
     const res = await CommentControllerService.listReplyUsingGet(comment.id);
     if(res.code === 200){
       comment.replyVOList = res.data;
-      
-      // 回复大于5条展示分页
+      //alert(comment.replyCount)
+      //回复大于5条展示分页
       // if (comment.replyCount > 5) {
-      //   pageRef.value[index].setPaging(true);
+      //   pageRef.value[index].hideOnSinglePage = "false";
       // }
       // 隐藏查看更多
       readMoreRef.value[index].style.display = "none";
@@ -148,7 +155,7 @@ const reloadComments = () => {
 const reloadReplies = async (index: number) => {
   const res = await CommentControllerService
     .listReplyUsingGet(commentList.value[index].id,
-      pageRef.value[index].current, commentList.value[index].replyCount);
+      pageRef.value[index].current, commentList.value[index].replyCount? + 1 : 1);
   
     if(res.code === 200){
       commentList.value[index].replyVOList = res.data;

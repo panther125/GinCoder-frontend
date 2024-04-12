@@ -28,7 +28,10 @@
                             show-word-limit />
           </a-form-item>
           <a-form-item field="background" label="文章背景">
-            <a-upload v-if="!form.background" draggable :change="uploadFile" :limit="1" />
+            <a-upload v-if="!form.background" draggable 
+            :show-preview-button="true"
+            :on-before-upload="uploadFile"
+            :limit="1" />
             <img v-else :src= "form.background" style="width: 20%; height: auto;" >
           </a-form-item>
           <div style="margin-top: 16px" />

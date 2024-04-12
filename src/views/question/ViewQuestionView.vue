@@ -480,7 +480,7 @@ const doSubmit = async () => {
     model: Number(codeMode.value),
   });
   if (res.code === 0) {
-    Message.success("提交成功");
+    Message.success("提交成功，可在提交记录查看AC情况！");
     resultData.value = res.data.judgeInfo;
     //console.log(resultData)
     if (activeKey.value === "submit") {
