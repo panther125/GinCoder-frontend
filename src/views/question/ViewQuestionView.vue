@@ -90,15 +90,15 @@
                       stripe
                     >
                       <template #result="{ record }">
-                        <a-tag
-                          v-if="record.judgeInfo.result === '成功'"
+                        <a-tag 
+                          v-if="record.judgeInfo.result === '成功' || resultData.result === 'Accepted'"
                           color="green"
                           bordered
                         >
                           {{ record.judgeInfo.result }}
                         </a-tag>
                         <a-tag
-                          v-else-if="record.judgeInfo.result === '等待判题'"
+                          v-else-if="record.judgeInfo.result === '等待判题' || resultData.result==='Compile Error'"
                           color="gray"
                           bordered
                         >
@@ -468,11 +468,13 @@ const form = ref<QuestionSubmitAddRequest>({
 /**
  * 提交代码
  */
-const doSubmit = async () => {
+const doSubmit = async (runContent: RunContent) => {
   if (!question.value?.id) {
     return;
   }
+  //const result = computed(() => runContent.input.replace(/\n/g, ","));
   controlRef.value!.isShow = true;
+  runContent.activeKey = "2";
   waitting.value = true;
   const res = await QuestionControllerService.doQuestionSubmitUsingPost({
     ...form.value,
@@ -480,8 +482,15 @@ const doSubmit = async () => {
     model: Number(codeMode.value),
   });
   if (res.code === 0) {
-    Message.success("提交成功，可在提交记录查看AC情况！");
-    resultData.value = res.data.judgeInfo;
+    //Message.success("提交成功，可在提交记录查看AC情况！");AcceptedCompile ErrorWrong Answer
+    resultData.value = res.data;
+    if( res.data.result === "成功"){
+      resultData.value.result ="Accepted"
+    }else if(res.data.result === "编译错误"){
+      resultData.value.result = "Compile Error"
+    }else if(res.data.result === "答案错误"){
+      resultData.value.result = "Wrong Answer"   
+    }
     //console.log(resultData)
     if (activeKey.value === "submit") {
       await loadSubmitData();

@@ -26,7 +26,7 @@
               >
                 <div v-if="resultData">
                   <p
-                    v-if="resultData.result === '成功'"
+                    v-if="resultData.result === '成功' || resultData.result === 'Accepted'"
                     :style="{ color: 'green' }"
                     class="result"
                   >
@@ -79,7 +79,7 @@
             />
             自测运行
           </a-button>
-          <a-button type="primary" size="mini" @click="doSubmit">
+          <a-button type="primary" size="mini" @click="doSubmit(runContent)">
             提交
           </a-button>
         </div>
@@ -111,7 +111,7 @@ interface Props {
   resultData: ResultData;
   resizeBoxHeight: number;
   maxResizeBoxHeight: number;
-  doSubmit: () => void;
+  doSubmit: (runContent: RunContent) => void;
   doRun: (runContent: RunContent) => void;
 }
 

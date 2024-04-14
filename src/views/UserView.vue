@@ -67,11 +67,12 @@
               </template>
             </a-upload>
           </a-space> -->
+          
           <a-avatar id="userAvatar" @click="onClcik" :style="{ backgroundColor: '#0A65CC' }">
             <img v-if="form.userAvatar" class="avatar-image" alt="avatar" :src="form.userAvatar" />
             <IconUser v-else />
             <template #trigger-icon>
-              <IconEdit />
+              <IconEdit/>
             </template>
           </a-avatar>
         </div>
@@ -132,7 +133,6 @@ const form = ref({
   email: loginUser.value.email,
   phone: loginUser.value.phone
 });
-
 // 上传头像功能
 // const file = ref();
 
@@ -160,7 +160,13 @@ const saveInfo = async () => {
   }
 };
 const onClcik = () => {
-  Message.info("暂时还未开发");
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let result = 'https://api.multiavatar.com/';
+  for (let i = 0; i < 16; i++) {
+    result += characters.charAt(Math.floor(Math.random() * 52));
+  }
+  alert(result)
+  form.userAvatar= result
 };
 </script>
 
