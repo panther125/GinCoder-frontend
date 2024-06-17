@@ -103,6 +103,7 @@
         :ref="tableRef"
         :columns="columns"
         :data="dataList"
+        :style="{ fontSize: '24px', color: '#ffb800' }"
         :pagination="{
           showTotal: true,
           pageSize: searchParams.pageSize,
@@ -112,6 +113,7 @@
         @page-change="onPageChange"
         bordered
         stripe
+        align="center"
       >
         <template #extent="{ record }">
           <a-tag v-if="record.extent === '简单'" color="#00af9b"> 简单 </a-tag>
@@ -132,20 +134,6 @@
         </template>
         <template #acceptedRate="{ record }">
           {{ `${record.passRate}` }}
-        </template>
-        <template #statue="{ record }">
-          <icon-minus-circle
-            v-if="record.statue === 1"
-            :style="{ fontSize: '24px', color: '#ffb800' }"
-          />
-          <icon-close-circle
-            v-if="record.statue === 2"
-            :style="{ fontSize: '24px', color: '#ff2d55' }"
-          />
-          <icon-check-circle
-            v-if="record.statue === 3"
-            :style="{ fontSize: '24px', color: '#00af9b' }"
-          />
         </template>
         <template #optional="{ record }">
           <a-space>
@@ -240,7 +228,7 @@ onMounted(() => {
 });
 
 const columns = [
-  {
+{
     title: "状态",
     slotName: "statue",
   },

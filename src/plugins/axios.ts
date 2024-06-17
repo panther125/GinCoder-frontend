@@ -34,8 +34,8 @@ axios.interceptors.response.use(
 
 // 携带凭证
 OpenAPI.WITH_CREDENTIALS = true;
-//const baseUrl ="http://localhost:9001";
-const baseUrl ="https://gincode.icu";
+const baseUrl ="http://localhost:9001";
+//const baseUrl ="https://gincode.icu";
 
 OpenAPI.BASE = baseUrl;
 // console.log("当前环境：", process.env.NODE_ENV, "请求地址", baseUrl);

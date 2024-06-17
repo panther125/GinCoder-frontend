@@ -3,10 +3,15 @@
     <a-card class="manageQuestionList">
     <a-list
         hoverable
+        :grid-props="{ gutter: [20, 20], sm: 24, md: 12, lg: 8, xl: 6 }"
         class="list-demo-action-layout"
         :bordered="false"
         :data="dataSource"
-        :pagination-props="PaginationProps"
+        :pagination-props="{
+        pageSize: searchParams.pageSize,
+        current: searchParams.current,
+        total,
+      }"
         @page-change="onPageChange"
     >
         <template #item="{ item }">
@@ -54,7 +59,7 @@ const searchParams = ref<PostQueryRequest>({
   pageSize: 8,
   current: 1,
 });
-
+const total = ref<number>(0);
 const colors = [
       'orange',
       'gold',
@@ -103,6 +108,7 @@ const loadData = async () => {
         dataSource.value = res.data.records;
         //alert(dataSource.value.)
         PaginationProps.value.total = res.data.total;
+        total.value = res.data.data?.total || 0;
     } else {
         Message.error("数据加载失败" + res.message);
     }
@@ -120,23 +126,23 @@ const loadData = async () => {
 #postView {
     max-width: 1440px;
 }
-:deep(.list-demo-action-layout){
+/* :deep(.list-demo-action-layout){
     display: flex;
 }
 :deep(.arco-list-content) {
     display: flex;
     flex-wrap: wrap;
-}
-.list-demo-action-layout .image-area {
+} */
+/* .list-demo-action-layout .image-area {
   width: 183px;
   height: 119px;
   border-radius: 2px;
   overflow: hidden;
-}
+} */
 
 .list-demo-action-layout .list-demo-item {
   padding: 20px 0;
-  width: 25%;
+  height: 389px;
   border-bottom: 1px solid var(--color-fill-3);
 }
 

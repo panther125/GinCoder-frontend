@@ -2,7 +2,7 @@
   <div id="Home">
     <div class="typewriter">
       <h1 class="typing">Enjoy Coding And Get Happiness.</h1>
-      <h1 class="typing">刷提前请先浏览注意事项</h1>
+      <h1 class="typing">刷题前请先浏览注意事项</h1>
       <a-button class="button" type="outline" @click="clickButton"
         >开始刷题</a-button
       >
@@ -13,7 +13,9 @@
 <script setup>
 import { useRouter } from "vue-router";
 const router = useRouter();
-
+const helloworld = "```go\n"+
+              "fmt.Println(\"Hello World\")\n"+
+              "```";
 const clickButton = () => {
   router.push({
     path: "/questions",
