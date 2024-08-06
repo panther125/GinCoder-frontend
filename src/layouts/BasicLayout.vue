@@ -942,7 +942,10 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <p class="footer-info">© 2023 Gin 琴酒</p>
+        <p class="footer-info"> 
+          <a href="https://beian.miit.gov.cn/" style="text-decoration: none; margin-right: 20px;" >赣ICP备2023008742号-1</a>
+          © 2023 Gin 琴酒
+        </p>
       </a-layout-footer>
     </a-layout>
   </div>
@@ -998,7 +1001,7 @@ import GlobalHeader from "../components/GlobalHeader.vue";
 #basicLayout .footer .footer-info {
   color: var(--color-text-1);
   font-family: 思源黑体;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 23px;
   letter-spacing: 0px;

@@ -93,6 +93,15 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: "/chat",
+    name: "ai对话",
+    component: () => import("../views/chat/chatView.vue"),
+    meta: {
+      icon: IconUserGroup,
+      layout: BasicLayout,
+    },
+  },
+  {
     path: "/post/detaile/:id",
     name: "文章详情",
     component: () => import("../views/post/viewPostView.vue"),
